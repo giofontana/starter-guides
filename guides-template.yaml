@@ -12,7 +12,7 @@ parameters:
   required: true
 - name: CONTENT_URL_PREFIX
   description: Console url (e.g. https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.11)
-  value: https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-3.11
+  value: https://raw.githubusercontent.com/giofontana/starter-guides/ocp-3.11
   displayName: Content URL prefix
   required: true
 - name: WORKSHOPS_URLS
