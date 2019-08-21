@@ -1,3 +1,5 @@
+TESSSTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
 == Command Line
 
 The first thing we want to do to ensure that our `oc` command line tools was
