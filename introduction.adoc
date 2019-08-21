@@ -1,0 +1,3 @@
+== OpenShift Introduction
+
+include::https://docs.google.com/presentation/d/1TYudTGF4H91qRmfOOVtJF9oIyQCqDnAP-6KVZj86loI/edit#slide=id.g1ec295bb39_0_74[]

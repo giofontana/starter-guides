@@ -1,6 +1,6 @@
 ---
 id: java-starter-workshop
-name: Developing Java Applications on OpenShift - Starter Lab
+name: OpenShift Operations Workshop
 
 content:
   url: https://raw.githubusercontent.com/giofontana/starter-guides/ocp-3.11

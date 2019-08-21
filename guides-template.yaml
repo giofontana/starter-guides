@@ -44,7 +44,7 @@ objects:
     workshop.yml: |+
       ---
       id: workshop
-      name: Developing Java Applications on OpenShift - Starter Lab
+      name: OpenShift Operations Workshop
 
       content:
         url: ${CONTENT_URL_PREFIX}
