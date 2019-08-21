@@ -25,6 +25,7 @@
 
 - name: Delete guides app, if already exists
   command: "oc delete dc starter-guides -n {{ namespace }}"
+  ignore_errors: true
 
 - name: Add guides template to {{ namespace }}
   command: "oc apply -f {{ tmp_dir.path }}/guides.yml -n {{ namespace }}"

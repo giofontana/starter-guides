@@ -68,6 +68,8 @@ config:
       value: "1.2.0"
 
 modules:
+  introduction:
+    name: OpenShift Introduction
   common-environment:
     name: Environment Overview
     vars:
