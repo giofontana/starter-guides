@@ -8,5 +8,41 @@ OpenShift IT operations a secure, enterprise-grade Kubernetes that provides poli
 
 image::ocp-features.png[OpenShift Features,800,align="center"]
 
+== Basic Concepts
 
+Kubernetes contains a number of abstractions that represent the state of your system: deployed containerized applications and workloads, their associated network and disk resources, and other information about what your cluster is doing. These abstractions are represented by objects in the Kubernetes API; see the Kubernetes Objects overview for more details.
+
+The basic Kubernetes objects include:
+
+- Container: A container is the smallest compute unit.
+
+image::ocp-container.png[Container,100,align="center"]
+
+- Container registry: Container images are stored in an image registry. OpenShift has a built-in image registry to store images and and also deploy from the registry.
+
+image::ocp-registry.png[Image Registry,500,align="center"]
+
+- Pod: Containers are wrapped in pods which are units of deployment and management.
+
+image::ocp-pod.png[Pod,500,align="center"]
+
+- Deployment: Pods configuration is defined in a deployment.
+
+image::ocp-deployment.png[Deployment,500,align="center"]
+
+- Service: Services provide internal load-balancing and service discovery across pods. Apps can talk to each other via services.
+
+image::ocp-service.png[Service,500,align="center"]
+
+- Routes: Routes add services to the external load-balancer and provide readable urls for the app.
+
+image::ocp-routes.png[Service,500,align="center"]
+
+- Projects (Namespaces): Projects isolate apps across environments, teams, groups and departments.
+
+image::ocp-namespaces.png[Service,500,align="center"]
+
+- Volume: Directory which is accessible to the containers in a pod. It can be provided by different backends, such as nfs, glusterfs and others.
+
+image::ocp-volumes.png[Service,500,align="center"]
 
