@@ -1,12 +1,12 @@
 == OpenShift Introduction
 
-image::images\ocp-marketure-diagram.svg[OpenShift Components,800,align="center"]
+image::ocp-marketure-diagram.svg[OpenShift Components,800,align="center"]
 
 Red Hat helps organizations develop, deploy, and manage existing and container-based applications seamlessly across physical, virtual, and public cloud infrastructures. Built on proven open source technologies, OpenShift helps application development and IT operations teams modernize applications, deliver new services, and accelerate development processes.
 
 OpenShift IT operations a secure, enterprise-grade Kubernetes that provides policy-based control and automation for applications. Cluster services, scheduling, and orchestration provide load-balancing and auto-scaling capabilities. Security features prevent tenants from compromising other applications or the underlying host. And because OpenShift can attach persistent storage directly to containers, IT organizations can run both stateful and stateless applications on one platform. 
 
-image::images\ocp-features.png[OpenShift Features,800,align="center"]
+image::ocp-features.png[OpenShift Features,800,align="center"]
 
 
 
