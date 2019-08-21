@@ -34,6 +34,7 @@ plans:
       required: true
       display_type: text
       display_group: OpenShift User
+      default: admin
     - name: openshift_password
       title: Password
       description: Password is required for creating project admin resources
@@ -41,6 +42,7 @@ plans:
       required: true
       display_type: password
       display_group: OpenShift User
+      default: 'r3dh4t1!'
     - name: workshop_type
       title: Workshop type
       description: Type of workshop to deliver (Java, Python, node.js)
@@ -56,6 +58,7 @@ plans:
       type: number
       required: true
       display_group: Workshop
+      default: 1
     - name: openshift_user_password
       title: OpenShift User Password
       description: The OpenShift password for participants to be displayed in the lab guide to participants
@@ -63,6 +66,7 @@ plans:
       required: true
       display_type: text
       display_group: Workshop
+      default: 'redhat123'
     - name: openshift_master_url
       title: OpenShift Master URL
       description: The address to OpenShift master URL to be displayed in the lab guide to participants
@@ -70,6 +74,7 @@ plans:
       required: true
       display_type: text
       display_group: Lab Guide
+      default: 'https://console.ws.rhbr-labs.com:8443'
     - name: infrasvcs_adm_user
       title: Infrastructure Services Admin User
       description: Admin user for infrastructure services (Gogs, Nexus, ...)
