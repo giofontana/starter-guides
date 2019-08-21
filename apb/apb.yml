@@ -1,28 +1,24 @@
 version: '1.0.0'
-name: starter-workshop-apb-teste
-description: TESTEEEEEEE - APB to deploy required infra components for the Developer Starter Workshop on an OpenShift cluster
+name: openshift-ops-workshop-apb
+description: APB to deploy required infra components for the OpenShift Operations Workshop on an OpenShift cluster
 bindable: False
 async: optional
 tags:
 - workshop
 metadata:
-  dependencies: ['docker.io/osevg/workshopper:latest','docker.io/openshiftdemos/gogs:0.11.34','quay.io/wkulhanek/etherpad:1.6.5','docker.io/sonatype/nexus3:3.11.0', 'docker.io/raffaelespazzoli/ocp-ops-view:latest', 'quay.io/openshiftlabs/workshop-spawner:3.0.5', 'quay.io/openshiftlabs/workshop-terminal:2.6.1']
+  dependencies: ['docker.io/osevg/workshopper:latest','quay.io/wkulhanek/etherpad:1.7.5','quay.io/openshiftlabs/workshop-spawner:3.0.5', 'quay.io/openshiftlabs/workshop-terminal:2.6.1']
   displayName: "OpenShift Developer Starter Workshop Installer"
-  longDescription: |-
-    TESTEEEEEEEEEEEEEEEE 
+  longDescription: |- 
     Installs the lab instructions and required components
-    - Gogs server
-    - Nexus
     - Etherpad
     - Lab Guides
-    - OCP-OpsView (image by Raffaele Spazzoli)
     - OpenShift Workshop Terminal
-    for running the Getting Started developing on OpenShift Workshop https://github.com/openshift-labs/starter-guides
+    for running the Getting Started developing on OpenShift Workshop https://github.com/gio-fontana/starter-guides
   console.openshift.io/iconClass: "pficon pficon-process-automation"
   providerDisplayName: "Red Hat, Inc."
 plans:
   - name: default
-    description: Deploys OpenShift Starter Workshop Infrastructure
+    description: Deploys OpenShift Operations Workshop Infrastructure
     free: True
     metadata:
       displayName: Default
