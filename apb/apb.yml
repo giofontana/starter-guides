@@ -1,6 +1,6 @@
 version: '1.0.0'
 name: starter-workshop-apb-teste
-description: APB to deploy required infra components for the Developer Starter Workshop on an OpenShift cluster
+description: TESTEEEEEEE - APB to deploy required infra components for the Developer Starter Workshop on an OpenShift cluster
 bindable: False
 async: optional
 tags:
