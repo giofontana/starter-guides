@@ -17,4 +17,4 @@ image::ocp-monitoring-3.png[Application Logs]
 
 Inspect the dashboards and graphs that comes out-of-the-box with OpenShift.
 
-image::ocp-monitoring-3.png[Application Logs]
+image::ocp-monitoring-4.png[Application Logs]
