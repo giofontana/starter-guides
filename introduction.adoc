@@ -2,7 +2,7 @@
 
 {nbsp} +
 
-image::images/ocp-marketure-diagram.png[OpenShift Components,600,align="center"]
+image::ocp-marketure-diagram.png[OpenShift Components,600,align="center"]
 
 {nbsp} +
 
