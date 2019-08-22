@@ -25,7 +25,7 @@ Readiness Probe::
   `template.spec.containers.readinessprobe` stanza of a pod configuration.
 
 It sounds complicated, but it really isn't. We will use the web console to add
-these probes to our `nationalparks` application.
+these probes to our `parksmap` application.
 
 == Exercise: Add Health Checks
 As we are going to be implementing a realistic CI/CD pipeline, we will be doing
@@ -34,16 +34,16 @@ to test the app, it must be ready. This is where OpenShift's application health
 features come in very handy.
 
 We are going to add both a readiness and liveness probe to the existing
-`nationalparks` deployment. This will ensure that OpenShift does not add any
+`parksmap` deployment. This will ensure that OpenShift does not add any
 instances to the service until they pass the readiness checks, and will ensure
 that unhealthy instances are restarted (if they fail the liveness checks).
 
 Click *Applications* &rarr; *Deployments* on the left-side bar. Click
-`nationalparks`. Click on `Configuration`.
+`parksmap`. Click on `Configuration`.
 You will see the warning about health checks, with a link to
 click in order to add them.
 
-image::nationalparks-application-health-warning.png[Healthchecks warning,align="center"]
+image::parksmap-application-health-warning.png[Healthchecks warning,align="center"]
 
 Click *Add health checks* now.
 
@@ -52,21 +52,20 @@ then fill them out as follows:
 
 _Readiness Probe_
 
-* Path: `/ws/healthz/`
-* Initial Delay: `20`
+* Path: `/`
+* Initial Delay: `1`
 * Timeout: `1`
 
 _Liveness Probe_
 
-* Path: `/ws/healthz/`
-* Initial Delay: `120`
+* Path: `/`
+* Initial Delay: `60`
 * Timeout: `1`
 
 This is shown in the following image:
 
-image::nationalparks-application-health-config.png[Readiness and Liveness Probe]
-
-WARNING: Note the trailing slash in the URL
+image::parksmap-application-health-config-readiness.png[Readiness Probe]
+image::parksmap-application-health-config-liveness.png[Liveness Probe]
 
 Once you have entered in the values show above, click *Save* and then click the *Overview* button in the left navigation. You
 will notice that these changes caused a new deployment -- they counted as a

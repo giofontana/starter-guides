@@ -63,12 +63,13 @@ objects:
         - common-explore
         - common-parksmap-architecture
         - parksmap-docker
-        - parksmap-scaling
         - parksmap-routes
-        - parksmap-logging
         - parksmap-permissions
         - parksmap-rsh
-        - nationalparks-application-health
+
+        - parksmap-scaling
+        - parksmap-logging
+        - parksmap-application-health
         - common-further-resources
         - common-workshop-links
 - kind: ImageStream
