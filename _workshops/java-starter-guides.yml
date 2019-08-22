@@ -20,7 +20,7 @@ modules:
   - parksmap-rsh
   - nationalparks-java
   - nationalparks-java-databases
-  - nationalparks-application-health
+  - parksmap-application-health
   - nationalparks-java-pipeline
   - nationalparks-java-pipeline-codechanges-gogs
   - mlbparks-templates
