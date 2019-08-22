@@ -58,8 +58,8 @@ objects:
       modules:
         activate:
         - introduction-ptbr
-        - common-environment
-        - common-cli
+        - common-environment-ptbr
+        - common-cli-ptbr
         - common-explore
         - common-parksmap-architecture
         - parksmap-docker

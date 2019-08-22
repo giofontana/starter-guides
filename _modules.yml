@@ -38,7 +38,7 @@ config:
       value: 1
     - name: ENV_NODES
       desc: Number of container nodes in the cluster
-      value: 20
+      value: 2
     ##
     # Module installing CLI
     # 
@@ -80,6 +80,14 @@ modules:
       ENV_NODES:
       INFRA_PROJECT:
       ROUTER_ADDRESS:
+  common-environment-ptbr:
+    name: Environment Overview
+    vars:
+      ENV_MASTERS:
+      ENV_INFRA:
+      ENV_NODES:
+      INFRA_PROJECT:
+      ROUTER_ADDRESS:        
   common-parksmap-architecture:
     name: Architecture Overview of the ParksMap Application
   common-cli:
@@ -90,6 +98,14 @@ modules:
       DOWNLOAD_CLIENT_LIN32:
       DOWNLOAD_CLIENT_LIN64:
       OC_VERSION:
+  common-cli-ptbr:
+    name: Installing the *oc* client tool
+    vars:
+      DOWNLOAD_CLIENT_WINDOWS:
+      DOWNLOAD_CLIENT_MAC:
+      DOWNLOAD_CLIENT_LIN32:
+      DOWNLOAD_CLIENT_LIN64:
+      OC_VERSION:        
   common-explore:
     name: Exploring the CLI and Web Console
     vars:

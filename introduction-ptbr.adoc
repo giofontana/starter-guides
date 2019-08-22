@@ -48,7 +48,7 @@ image::ocp-namespaces.png[Service,500,align="center"]
 
 image::ocp-volumes.png[Volumes,300,align="center"]
 
-== Architecture
+== Arquitetura
 
 OpenShift é suportado onde o Red Hat Enterprise Linux e Red Hat CoreOS for. Multiplos tipos de infrastrutura podem ser utilizados para instalação do OpenShift.
 

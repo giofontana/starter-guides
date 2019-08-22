@@ -1,0 +1,36 @@
+image::common-environment-ocp-architecture.png[OCP Architecture]
+
+Você estará interagindo com um ambiente de OpenShift rodando em cloud pública. O ambiente consiste nos seguintes sistemas:
+
+* {{ ENV_MASTERS }} master node(s)
+* {{ ENV_INFRA }} infrastructure node(s)
+* {{ ENV_NODES }} "application" nodes
+* An NFS server
+
+Os seguintes serviços fazem parte da infraestrutura:
+
+* This lab manual
+* The OpenShift Docker registry
+* The OpenShift router
+* Etherpad
+
+Adicionalmente, foi criado uma conta de usuário para cada participante do workshop.
+
+Antes de continuar, visite o Etherpad na seguinte URL:
+
+----
+http://etherpad-{{ INFRA_PROJECT }}.{{ ROUTER_ADDRESS }}/p/workshop
+----
+
+Obtenha a sua conta, conforme assinalado pelo instrutor. Esta será sua conta para todos os exercícios. Por exemplo:
+
+----
+{{ USER_NAME }}=Luke Skywalker
+----
+
+Você irá ver varios códigos e blocos de comandos durante os exercícios. Os blocos podem ser copiados/colados diretamente. Outros irão requerer modificações do comando antes da execução. 
+
+[source,role=copypaste]
+----
+some command for {{ USER_NAME }}
+----
