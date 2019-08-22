@@ -7,6 +7,11 @@
     src: guides-java.yml
     dest: "{{ tmp_dir.path }}/guides.yml"
   when: workshop_type == "java"
+- name: "Process guides template (for java workshop)"
+  template:
+    src: guides-java-ptbr.yml
+    dest: "{{ tmp_dir.path }}/guides.yml"
+  when: workshop_type == "ptbr"  
 - name: "Process guides template (for python workshop)"
   template:
     src: guides-python.yml

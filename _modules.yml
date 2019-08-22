@@ -70,6 +70,8 @@ config:
 modules:
   introduction:
     name: OpenShift Introduction
+  introduction-ptbr:
+    name: OpenShift - Introdução    
   common-environment:
     name: Environment Overview
     vars:

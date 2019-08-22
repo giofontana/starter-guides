@@ -1,0 +1,70 @@
+== OpenShift - Introdução
+
+{nbsp} +
+
+image::ocp-marketure-diagram.png[OpenShift Components,600,align="center"]
+
+{nbsp} +
+
+Red Hat auxilia organizações a desenvolver, implantar e gerenciar aplicações existentes baseadas and containers de forma consistente entre infra-estrutura física, virtual e em cloud pública. Construído em tecnologias open source comprovadas, o OpenShift auxilia equipes desenvolvimento e operações a modernizarem suas aplicações, entregar novos serviços e acelerar o processo de desenvolvimento.
+
+image::ocp-features.png[OpenShift Features,800,align="center"]
+
+== Conceitos Básicos
+
+Kubernetes trabalha com uma série de abstrações que representam o estado do sistema: aplicações em containers e workloads, juntamente com objetos de redes e storage. Essas abstrações são representadas por objetos na API do Kubernetes. 
+
+Os objetos basicos do Kubernetes incluem:
+
+- Container: Um container é a menor unidade computacionacional.
+
+image::ocp-container.png[Container,100,align="center"]
+
+- Container registry: As imagens de containers são armazenadas em um registry de imagens. OpenShift contém um registry out-of-the-box para armazenar as imagens e efetuar o deploy de um container.
+
+image::ocp-registry.png[Image Registry,500,align="center"]
+
+- Pod: Containers podem ser unidos em PODs, que são os objetos implementados e gerenciados dentro da plataforma OpenShift.
+
+image::ocp-pod.png[Pod,500,align="center"]
+
+- Deployment: A configuração de um POD é definida como deployment.
+
+image::ocp-deployment.png[Deployment,500,align="center"]
+
+- Service: Serviços proveem balanceamento interno e service discovery entre PODs.
+
+image::ocp-service.png[Service,500,align="center"]
+
+- Routes: Rotas inserem os Serviços ao balanceador externo provendo URLs acessíveis para as aplicações.
+
+image::ocp-routes.png[Service,500,align="center"]
+
+- Projects (Namespaces): Projetos fazem isolamento das aplicações entre ambientes, equipes, grupos e/ou departamentos.
+
+image::ocp-namespaces.png[Service,500,align="center"]
+
+- Volume: Volumes prove storage persistente para uso dos containers
+
+image::ocp-volumes.png[Volumes,300,align="center"]
+
+== Architecture
+
+OpenShift é suportado onde o Red Hat Enterprise Linux e Red Hat CoreOS for. Multiplos tipos de infrastrutura podem ser utilizados para instalação do OpenShift.
+
+Sua infraestrutura é composta dos seguintes tipos de servidores:
+
+- `Master Nodes`: Mantem estado do ambiente e orquestra todos as atividades que acontecem nos `Nodes`.
+Keep and understand the state of the environment and orchestrate all activities on the Nodes.
+- `Nodes`: Onde as aplicações são hospedadas.
+
+image::ocp-architecture.png[Architecture Components,800,align="center"]
+
+=== Arquitetura em Alta Disponibilidade
+
+Um ambiente em alta disponibilidade requer no mínimo 3 instancias por conta do quorum necessário para o ETCD (base de dados do Kubernetes). Requer um load balancer em frente aos masters.
+
+image::ocp-architecture-ha.png[HA Architecture,800,align="center"]
+
+Os nós de aplicação podem ser escalados simplesmente adicionando novos servidores ao cluster.
+
