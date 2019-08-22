@@ -58,4 +58,5 @@ Its architecture is composed of the following types of servers:
 - Master Nodes: Keep and understand the state of the environment and orchestrate all activities on the Nodes.
 - Nodes: Where end-user Aplicaçãos are run.
 
-image::images/ocp-architecture.png[Volumes,800,align="center"]
+image::ocp-architecture.png[Architecture Components,800,align="center"]
+
