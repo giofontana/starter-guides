@@ -60,7 +60,7 @@ objects:
         - introduction-ptbr
         - common-environment-ptbr
         - common-cli-ptbr
-        - common-explore
+        - common-explore-ptbr
         - common-parksmap-architecture
         - parksmap-docker
         - parksmap-routes
