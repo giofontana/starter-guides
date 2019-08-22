@@ -254,6 +254,10 @@ modules:
     name: Using Port-Forwarding and Remote Debugging
     vars:
       DOCS_URL:
+
+  ocp-monitoring:
+    name: Exploring OpenShift' Monitoring (Prometheus)
+
   common-further-resources:
     name: Further Resources
   common-workshop-links:
@@ -270,3 +274,4 @@ modules:
 #    name: Running a container as a non Root user
 #  gcp-bigquery:
 #    name: Integrating with Google Compute Service BigQuery
+

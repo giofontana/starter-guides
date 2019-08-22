@@ -64,12 +64,15 @@ objects:
         - common-parksmap-architecture
         - parksmap-docker
         - parksmap-routes
-        - parksmap-permissions
         - parksmap-rsh
+
+        - parksmap-permissions
 
         - parksmap-scaling
         - parksmap-logging
+        - ocp-monitoring
         - parksmap-application-health
+        
         - common-further-resources
         - common-workshop-links
 - kind: ImageStream
