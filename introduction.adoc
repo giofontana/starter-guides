@@ -55,8 +55,17 @@ image::ocp-volumes.png[Volumes,300,align="center"]
 OpenShift is fully supported anywhere Red Hat Enterprise Linux is. Hybrid deployments across multiple infrastructures can be achieved, but many customers are still adopting OpenShift inside their existing, traditional virtualized environments.
 
 Its architecture is composed of the following types of servers:
+
 - Master Nodes: Keep and understand the state of the environment and orchestrate all activities on the Nodes.
 - Nodes: Where end-user Aplicaçãos are run.
 
 image::ocp-architecture.png[Architecture Components,800,align="center"]
+
+=== High Availability Architecture
+
+A full HA setup requires a minimum of 3 instances because of etcd data store clustering, and a load balancer in front of the masters.
+
+image::ocp-architecture-ha.png[HA Architecture,800,align="center"]
+
+The application nodes can be scaled by simply adding more app nodes to the cluster.
 
