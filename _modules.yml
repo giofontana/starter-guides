@@ -306,7 +306,11 @@ modules:
       DOCS_URL:
 
   ocp-monitoring:
-    name: Exploring OpenShift' Monitoring (Prometheus)
+    name: Exploring OpenShift's Monitoring (Prometheus)
+
+
+  ocp-monitoring-ptbr:
+    name: Explorando o Monitoring (Prometheus) do OpenShift
 
   common-further-resources:
     name: Further Resources

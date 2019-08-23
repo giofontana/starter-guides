@@ -1,0 +1,20 @@
+O OpenShift fornece alguns mecanismos convenientes para monitorar o desempenho do cluster.
+Em primeiro lugar é a capacidade de examinar o desempenho do cluster diretamente do console de cluster ou através de dashboards no grafana.
+
+== Exercise: Examining Cluster's Performance
+
+Na página do console da Web `Overview`, clique no menu na parte superior da página e selecione `Cluster Console`.
+
+image::ocp-monitoring-1.png[Cluster Console]
+
+Você deve ver o painel *Cluster Console*:
+
+image::ocp-monitoring-2.png[Application Logs]
+
+O OpenShift também fornece uma instância do Prometheus out-of-the-box, que inclui muitos gráficos para monitorar a infraestrutura - esses painéis estão disponíveis no Grafana. Para acessar o Grafana, clique na opção `Dashboards`, no menu `Monitoring`:
+
+image::ocp-monitoring-3.png[Application Logs]
+
+Inspecione os painéis e os gráficos out-of-the-box do OpenShift.
+
+image::ocp-monitoring-4.png[Application Logs]

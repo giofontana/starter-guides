@@ -70,7 +70,7 @@ objects:
 
         - parksmap-scaling-ptbr
         - parksmap-logging-ptbr
-        - ocp-monitoring
+        - ocp-monitoring-ptbr
         - parksmap-application-health
         
         - common-further-resources
