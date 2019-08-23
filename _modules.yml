@@ -128,7 +128,7 @@ modules:
       PARKSMAP_IMAGENAME:
       PARKSMAP_VERSION:
   parksmap-docker-ptbr:
-    name: Deploying Your First Container Image
+    name: Deploy de Container
     vars:
       CONSOLE_ADDRESS:
       DOCS_URL:
