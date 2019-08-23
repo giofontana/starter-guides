@@ -68,7 +68,7 @@ objects:
 
         - parksmap-permissions-ptbr
 
-        - parksmap-scaling
+        - parksmap-scaling-ptbr
         - parksmap-logging
         - ocp-monitoring
         - parksmap-application-health

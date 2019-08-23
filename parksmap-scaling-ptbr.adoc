@@ -1,0 +1,212 @@
+== Background: Deployment Configurations e Replication Controllers
+
+Enquanto *Services* fornecem roteamento e balanceamento de carga para *Pods*, *ReplicationControllers* (RC) são usados para especificar e, em seguida, garantir o número desejado de *Pods* (réplicas) estão em existência. Por exemplo, se você sempre deseja que o servidor de aplicativos seja dimensionado para 3 *Pods* (instâncias), um *ReplicationController* é necessário. Sem um RC, qualquer *Pod* que for derrubado não são reiniciados automaticamente. Os *ReplicationControllers* são
+no OpenShift uma espécie de "auto cura".
+
+Um *DeploymentConfiguration* (DC) define como uma aplicação no OpenShift deve ser
+implantado. https://{{DOCS_URL}}/architecture/core_concepts/deployments.html#deployments-and-deployment-configurations[deployments documentation]:
+
+[quote]
+__
+Com base em replication controllers, o OpenShift extende para o
+desenvolvimento de software e ciclo de vida de implantação o conceito de implantações.
+No caso mais simples, uma implantação apenas cria um novo replication controller e
+permite que ele inicie pods. No entanto, as implantações do OpenShift também fornecem a capacidade
+de transição de uma versão de implantação para uma nova e também
+definir hooks para ser executado antes ou depois de criar o replication controller.
+__
+
+Em quase todos os casos, você vai acabar usando o *Pod*, *Service*, *ReplicationController* e *DeploymentConfiguration* juntos. E, em
+quase todos esses casos, OpenShift irá criar todos eles para você automaticamente.
+
+== Exercício: explorando objetos relacionados à implantação
+
+Agora que sabemos o fundo o que um *ReplicatonController* e
+*DeploymentConfig* são, podemos explorar como eles funcionam e estão relacionados. Veja 
+o *DeploymentConfig* (DC) que foi criado para você quando você efetuou o deploy da aplicação `parksmap`:
+
+[source,bash,role=copypaste]
+----
+oc get dc
+----
+
+[source,bash]
+----
+NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
+parksmap   1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+----
+
+Para obter mais detalhes, podemos olhar para o *ReplicationController* (*RC*).
+
+Dê uma olhada no *ReplicationController* (RC) que foi criado para você quando
+você solicitou ao OpenShift para levantar a imagem do `parksmap`:
+
+[source,bash,role=copypaste]
+----
+oc get rc
+----
+
+[source,bash]
+----
+NAME         DESIRED   CURRENT   READY     AGE
+parksmap-1   1         1         0         4h
+----
+
+Isso nos permite saber que, neste momento, esperamos que um *Pod* seja implantado
+(`Desired`), e temos um *Pod* realmente implantado (`Current`). Mudando
+o número desejado, podemos dizer ao OpenShift que queremos mais ou menos *Pods*.
+
+O *HorizontalPodAutoscaler* do OpenShift monitora efetivamente o uso da CPU de um
+conjunto de instâncias e, em seguida, manipula os RCs adequadamente.
+
+Você pode aprender mais sobre o HPA CPU-based em 
+https://{{DOCS_URL}}/dev_guide/pod_autoscaling.html[Horizontal Pod Autoscaler here]
+
+== Exercício: dimensionamento da aplicação
+
+Vamos escalar nossa aplicação `parksmap` para 2 instâncias. Podemos fazer isso com
+o comando `scale`. Você também pode fazer isso clicando na seta "para cima" ao lado
+do *Pod* no console Web do OpenShift na página de visão geral.
+
+[source,bash,role=copypaste]
+----
+$ oc scale --replicas=2 dc/parksmap
+----
+
+Você também pode escalar até dois pods clicando na seta para cima no console da Web, conforme mostrado na imagem a seguir:
+
+image::parksmap-scaleup.png[Scaling]
+
+Para verificar se alteramos o número de réplicas, emita o seguinte comando:
+
+[source,bash,role=copypaste]
+----
+oc get rc
+----
+
+[source,bash]
+----
+NAME         DESIRED   CURRENT   READY     AGE
+parksmap-1   2         2         0         4h
+----
+
+Você pode ver que agora temos 2 réplicas. Vamos verificar o número de pods com
+o comando `oc get pods`:
+
+[source,bash,role=copypaste]
+----
+oc get pods
+----
+
+[source,bash]
+----
+NAME               READY     STATUS    RESTARTS   AGE
+parksmap-1-8g6lb   1/1       Running   0          1m
+parksmap-1-hx0kv   1/1       Running   0          4h
+----
+
+E, finalmente, vamos verificar que o *Service* que aprendemos no
+laboratório anterior reflete com precisão os dois endpoints:
+
+[source,bash,role=copypaste]
+----
+oc describe svc parksmap
+----
+
+Você verá algo parecido com a seguinte saída:
+
+[source,bash]
+----
+Name:              parksmap
+Namespace:         userXY
+Labels:            app=workshop
+                   component=parksmap
+                   role=frontend
+Selector:          deploymentconfig=parksmap
+Type:              ClusterIP
+IP:                172.30.169.213
+Port:              8080-tcp  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.1.0.5:8080,10.1.1.5:8080
+Session Affinity:  None
+Events:            <none>
+----
+
+Outra maneira de examinar os endpoints do *Service* é da seguinte forma:
+
+[source,bash,role=copypaste]
+----
+oc get endpoints parksmap
+----
+
+E você verá algo parecido com o seguinte:
+
+[source,bash]
+----
+NAME       ENDPOINTS                                   AGE
+parksmap   10.1.0.5:8080,10.1.1.5:8080                 4h
+----
+
+Seus endereços IP provavelmente serão diferentes, pois cada pod recebe um IP exclusivo
+dentro do ambiente OpenShift. A lista de endpoints é uma maneira rápida de ver como
+muitos pods estão atrás de um serviço.
+
+Você também pode ver que ambos *Pods* estão sendo executados usando o console da Web:
+
+image::parksmap-scaled.png[Scaling]
+
+No geral, é simples dimensionar um aplicativo (*Pods* em um
+*Service*). A escalabilidade do aplicativo pode acontecer de forma extremamente rapida porque o OpenShift
+está apenas lançando novas instâncias de uma imagem existente, especialmente se essa imagem
+já está armazenada em cache no nó.
+
+== "Self Healing"
+
+Por conta dos *RCs* do OpenShift que estão constantemente monitorando para ver que o número desejado
+de *Pods* realmente estão em execução, você também pode esperar que o OpenShift irá "corrigir" a 
+situação se ele nunca está certo.
+
+Uma vez que temos dois *Pods* executando agora, vamos ver o que acontece se
+"acidentalmente" matar um. Execute o comando `oc get pods` novamente e escolha um *Pod*. 
+Em seguida, faça o seguinte:
+
+[source,bash,role=copypaste]
+----
+oc delete pod parksmap-1-hx0kv && oc get pods
+----
+
+[source,bash]
+----
+pod "parksmap-1-h45hj" deleted
+NAME               READY     STATUS              RESTARTS   AGE
+parksmap-1-h45hj   1/1       Terminating         0          4m
+parksmap-1-q4b4r   0/1       ContainerCreating   0          1s
+parksmap-1-vdkd9   1/1       Running             0          32s
+----
+
+Notou alguma coisa? Há um pod que está sendo terminado (esse que nós deletamos),
+e há um novo que já está sendo criado.
+
+Além disso, os nomes dos *Pods* são ligeiramente alterados.
+Isso porque o OpenShift quase imediatamente detectou que o estado atual (1
+*Pod*) não coincide com o estado desejado (2 *Pod*), e tenta corrigir a situação 
+agendando *Pod*.
+
+Além disso, o OpenShift fornece recursos para a verificação da saúde da aplicação (`readiness/liveness`). 
+Se as verificações básicas forem insuficientes, o OpenShift também permite que você execute 
+um comando dentro do container a fim de realizar a verificação. Esse comando pode ser um script complexo que usa
+qualquer linguagem.
+
+Com base nessas verificações de saúde, se o OpenShift identificar que o nossa aplicação `parksmap`
+não esta saudável, ele matará a instância e, em seguida, irá reiniciá-lo na tentativa de remediar o problema.
+
+Mais informações sobre *probe* de aplicações estão disponíveis em
+https://{{DOCS_URL}}/dev_guide/application_health.html[Application
+Health]
+
+== Exercício: escala para baixo
+
+Antes de continuarmos, vá em frente e dimensione a aplicação para uma única instância novamente. 
+Sinta-se livre para fazer isso usando qualquer método que preferir.
+
+Aviso: não se esqueça de escalar de volta para 1 instância, caso contrário você pode experimentar algum comportamento estranho em laboratórios posteriores. Isto ocorre devido a como o aplicativo foi desenvolvimento e não por conta do OpenShift propriamente dito.

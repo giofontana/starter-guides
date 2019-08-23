@@ -139,6 +139,11 @@ modules:
     vars:
       DOCS_URL:
       PARKSMAP_VERSION:
+  parksmap-scaling-ptbr:
+    name: Scaling and Self Healing
+    vars:
+      DOCS_URL:
+      PARKSMAP_VERSION:
   parksmap-routes:
     name: Exposing Your Application to the Outside World
     vars:
