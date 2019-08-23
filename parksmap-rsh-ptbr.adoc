@@ -1,0 +1,91 @@
+Containers são tratados como infra-estrutura imutável e, portanto, é geralmente
+não recomendado modificar o conteúdo de um container através de SSH ou executando 
+comandos dentro do container. No entanto, em alguns casos de uso, como debug de 
+um aplicativo, pode ser benéfico poder acessar um container para inspecioná-lo.
+
+== Exercício: sessão de shell remota para um container usando a CLI
+
+O OpenShift permite estabelecer sessões remotas de Shell em um container sem
+precisar executar um serviço SSH. A fim de estabelecer uma sessão interativa 
+dentro de um container, você pode usar o comando `oc rsh`. Para isso, primeiro
+obtenha a lista de pods disponíveis:
+
+[source,bash,role=copypaste]
+----
+oc get pods
+----
+
+Você deve uma saída semelhante à seguinte:
+
+[source,bash]
+----
+NAME               READY     STATUS    RESTARTS   AGE
+parksmap-2-tegp4   1/1       Running   0          2m
+----
+
+Agora você pode estabelecer uma sessão de shell remota no pod usando o nome do pod:
+
+[source,bash,role=copypaste]
+----
+oc rsh parksmap-2-tegp4
+----
+
+Você veria a seguinte saída:
+
+[source,bash]
+----
+sh-4.2$
+----
+
+[NOTE]
+====
+O shell padrão usado por `oc rsh` é `/bin/sh`. Se o contêiner implantado não
+não tem *sh* instalado e usa outro shell, (por exemplo, *A Shell*) o comando shell
+pode ser especificado após o nome do pod no comando emitido.
+====
+
+Execute o seguinte comando para listar os arquivos na pasta superior:
+
+[source,bash,role=copypaste]
+----
+ls /
+----
+
+[source,bash]
+----
+anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  parksmap.jar  proc  root  run  sbin  srv  sys  tmp  usr  var
+----
+
+== Exercício: sessão de shell remota para um container usando o console da Web
+
+O console da Web do OpenShift também fornece uma maneira conveniente de acessar uma sessão de terminal no container sem precisar usar a CLI.
+
+A fim de acessar um terminal através do console Web, clique em "Applications", em seguida, "Pods" e, finalmente, o nome do pod, como mostrado na imagem a seguir:
+
+image::parksmap-rsh-applications-pods.png[Pod List]
+
+Uma vez que você está visualizando as informações para o Pod selecionado, clique na guia "Terminal" para abrir uma sessão de Shell.
+
+image::parksmap-rsh-applications-pods-terminal.png[Pod List]
+
+
+Muito bacana!  Vá em frente e execute os mesmos comandos que você fez ao usar a CLI para ver como o terminal baseado no console da Web se comporta.
+
+Antes de prosseguir, feche a conexão com o pod.
+
+[source,bash,role=copypaste]
+----
+exit
+----
+
+[NOTE]
+====
+É importante entender que, por motivos de segurança, o OpenShift não executa containeres como o usuário especificado no Dockerfile por padrão. Na verdade quando o OpenShift inicia um contêiner, seu usuário é aleatório.
+
+Se você quiser ou precisar permitir que os usuários do OpenShift implantem imagens de container que
+precisam ser executado como root (ou qualquer usuário específico), uma pequena alteração de configuração é
+necessária. Você pode aprender mais sobre o
+https://{{DOCS_URL}}/creating_images/guidelines.html[container image guidelines]
+para o OpenShift, ou você pode olhar para a seção sobre
+https://{{DOCS_URL}}/admin_guide/manage_scc.html#enable-images-to-run-with-user-in-the-dockerfile[enabling images to run with a USER in the Dockerfile].
+====

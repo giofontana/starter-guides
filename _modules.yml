@@ -101,7 +101,7 @@ modules:
       DOWNLOAD_CLIENT_LIN64:
       OC_VERSION:
   common-cli-ptbr:
-    name: Instalando a ferramenta *oc*
+    name: Instalando a Ferramenta *oc*
     vars:
       DOWNLOAD_CLIENT_WINDOWS:
       DOWNLOAD_CLIENT_MAC:
@@ -144,7 +144,7 @@ modules:
     vars:
       PARKSMAP_VERSION:
   parksmap-routes-ptbr:
-    name: Expondo sua aplicação externamente
+    name: Expondo Sua Aplicação Externamente
     vars:
       PARKSMAP_VERSION:
   parksmap-logging:
@@ -155,6 +155,8 @@ modules:
     name: Role-Based Access Control
   parksmap-rsh:
     name: Remote Access to Your Application
+  parksmap-rsh-ptbr:
+    name: Acesso Remoto à Sua Aplicação
   nationalparks-java:
     name: Deploying Java Code
     vars:
