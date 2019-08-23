@@ -143,6 +143,10 @@ modules:
     name: Exposing Your Application to the Outside World
     vars:
       PARKSMAP_VERSION:
+  parksmap-routes-ptbr:
+    name: Expondo sua aplicação externamente
+    vars:
+      PARKSMAP_VERSION:
   parksmap-logging:
     name: Exploring OpenShift's Logging Capabilities
     vars:
