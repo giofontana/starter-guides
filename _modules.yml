@@ -127,6 +127,13 @@ modules:
       DOCS_URL:
       PARKSMAP_IMAGENAME:
       PARKSMAP_VERSION:
+  parksmap-docker-ptbr:
+    name: Deploying Your First Container Image
+    vars:
+      CONSOLE_ADDRESS:
+      DOCS_URL:
+      PARKSMAP_IMAGENAME:
+      PARKSMAP_VERSION:      
   parksmap-scaling:
     name: Scaling and Self Healing
     vars:
