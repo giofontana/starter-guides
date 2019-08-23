@@ -156,6 +156,10 @@ modules:
     name: Exploring OpenShift's Logging Capabilities
     vars:
       ROUTER_ADDRESS:
+  parksmap-logging-ptbr:
+    name: Explorando o Logging do OpenShift
+    vars:
+      ROUTER_ADDRESS:      
   parksmap-permissions:
     name: Role-Based Access Control
   parksmap-permissions-ptbr:

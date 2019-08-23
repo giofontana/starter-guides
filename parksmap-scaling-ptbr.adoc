@@ -204,7 +204,7 @@ Mais informações sobre *probe* de aplicações estão disponíveis em
 https://{{DOCS_URL}}/dev_guide/application_health.html[Application
 Health]
 
-== Exercício: escala para baixo
+== Exercício: escalar para baixo
 
 Antes de continuarmos, vá em frente e dimensione a aplicação para uma única instância novamente. 
 Sinta-se livre para fazer isso usando qualquer método que preferir.

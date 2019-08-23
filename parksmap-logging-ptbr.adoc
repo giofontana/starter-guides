@@ -1,0 +1,145 @@
+OpenShift fornece alguns mecanismos convenientes para exibir logs de aplicativo.
+Em primeiro lugar é a capacidade de examinar o log de um *Pod* do
+Web Console ou através da linha de comando.
+
+== Background: Container Logs
+
+OpenShift é construído de tal forma que espera recipientes para registrar todos os
+informações para `STDOUT`. Dessa forma, as informações regulares e de erro são
+capturados por meio de mecanismos padronizados do Docker. Ao explorar os logs do *Pod*
+diretamente, você está essencialmente atravessando o daemon do Docker para acessar o
+logs do contêiner, por meio da API do OpenShift. 
+
+[NOTE]
+====
+Em alguns casos, os aplicativos podem não ter sido projetados para enviar todos os seus
+logs para `STDOUT` e `STDERR`. Em muitos casos, vários arquivos de log locais
+são utilizados. Enquanto o OpenShift não pode analisar qualquer informação desses arquivos, nada
+impede que eles sejam criados, também. Em outros casos, as informações de log são
+enviado para algum sistema externo. Aqui, também, OpenShift não proíbe esses
+comportamentos. Se você tiver um aplicativo que não registra para `STDOUT`, ou porque ele
+já envia informações de log para algum sistema "externo" ou porque ele escreve
+várias informações de log para vários arquivos, não tema.
+====
+
+== Exercício: examinando logs
+
+Como já implantamos nosso aplicativo, podemos levar algum tempo para examinar seus
+Logs. Na página `Overview` do console da Web, clique no menu na 
+extrema direita do deployment e, em seguida, clique no item `View Logs`.
+
+image::parksmap-logging-overview-view-log-menu.png[View Logs]
+
+Você deve visualizar os logs do *Pod*:
+
+image::parksmap-logging-console-logs.png[Application Logs]
+
+Você também tem a opção de exibir logs a partir da linha de comando. Obter o nome de
+seu *Pod*:
+
+[source,bash,role=copypaste]
+----
+oc get pods
+----
+
+[source,bash]
+----
+NAME               READY     STATUS    RESTARTS   AGE
+parksmap-1-hx0kv   1/1       Running   0          5h
+----
+
+E, em seguida, use o comando `oc logs` para ver os logs deste *Pod*:
+
+[source,bash,role=copypaste]
+----
+oc logs parksmap-1-hx0kv
+----
+
+Você verá todos os logs de aplicativo rolar na tela:
+
+[source,bash]
+----
+15:34:25.844 [main] DEBUG io.fabric8.kubernetes.client.Config - Trying to configure client from Kubernetes config...
+15:34:25.937 [main] DEBUG io.fabric8.kubernetes.client.Config - Did not find Kubernetes config at: [/.kube/config]. Ignoring.
+15:34:25.937 [main] DEBUG io.fabric8.kubernetes.client.Config - Trying to configure client from service account...
+15:34:25.938 [main] DEBUG io.fabric8.kubernetes.client.Config - Found service account ca cert at: [/var/run/secrets/kubernetes.io/serviceaccount/ca.crt].
+15:34:25.960 [main] DEBUG io.fabric8.kubernetes.client.Config - Found service account token at: [/var/run/secrets/kubernetes.io/serviceaccount/token].
+15:34:25.961 [main] DEBUG io.fabric8.kubernetes.client.Config - Trying to configure client namespace from Kubernetes service account namespace path...
+15:34:25.962 [main] DEBUG io.fabric8.kubernetes.client.Config - Found service account namespace at: [/var/run/secrets/kubernetes.io/serviceaccount/namespace].
+....
+----
+
+== Exercício: Aggregated Pod Logs
+
+WARNING: Esta seção só é relevante se o a ferramenta logging está disponível no cluster do OpenShift, pois esse recurso é opcional.
+
+Quando seu aplicativo consiste em apenas um *Pod* e ele nunca falha, reinicia,
+ou tem outros problemas, exibir os logs diretamente na console do OpenShift pode não ser ruim. No entanto, em uma
+aplicação dimensionada onde *Pods* podem ter reiniciado, ter sido dimensionado para cima ou para baixo,
+ou se você quiser apenas obter informações históricas, esses mecanismos podem ser
+insuficientes.
+
+Felizmente, o OpenShift fornece um sistema opcional para agregação de log que usa
+Elasticsearch, Fluentd e Kibana (EFK).
+
+No console da Web do OpenShift na página de logs do *Pod*, à direita você verá
+um link "View Archive". Vá em frente e clique nele. 
+
+image::parksmap-logging-view-log-archive.png[View Logs]
+
+[NOTE]
+====
+O link anterior só aparece na página para os logs do pod. Se pretender aceder à interface Kibana em qualquer altura, pode fazê-lo utilizando o seguinte URL:
+
+https://kibana.{{ ROUTER_ADDRESS }}
+
+Use as mesmas credenciais que com o OpenShift
+====
+
+Clicar neste link leva você para a interface da Web Kibana. Esta interface é
+protegidos com controles de acesso baseados em função do OpenShift, assim você só pode ver os logs
+para projetos aos quais você tem acesso.
+
+image::parksmap-logging-kibana.png[Kibana Interface]
+
+O link "View Archive" que você clicou leva você para um modo de exibição padrão com uma query específica
+pré-preenchido. Kibana só irá mostrar-lhe logs onde o nome do pod é
+`parksmap-1-hx0kv` e no projeto (namespace) {{ USER_PROJECT }}.
+
+CAUTION: Na seguinte query do Kibana substitua `{{ USER_PROJECT }}` com o projeto fornecido a você e ao pod_name com seu Pod.
+
+[source,bash,role=copypaste]
+----
+kubernetes.pod_name:"parksmap-1-hx0kv" AND kubernetes.namespace_name:"{{ USER_PROJECT }}"
+----
+
+[NOTE]
+====
+Se a sua pesquisa não retornar nenhum hits, tente alterar o seletor de tempo no canto superior direito do padrão "últimos 15 miutes" para algo mais, como "o dia até agora" ou "última 1 hora"
+====
+
+Se você quiser ver todos os registros históricos para este projeto, basta remover a
+referência de nome do pod e clique na lupa ou pressione a tecla Enter.
+
+CAUTION: Na seguinte query do Kibana, substitua `{{ USER_PROJECT }}` com o projeto fornecido a você.
+
+[source,bash,role=copypaste]
+----
+kubernetes.namespace_name:"{{ USER_PROJECT }}"
+----
+
+Se você clicar no "x" na coluna para o nome do container e, na barra esquerda,
+clique em "add" para `kubernetes.pod_name`, você verá os logs do seu antigo *Pod*. 
+Lembre-se, nós os escalamos para baixo antes de vir aqui, para que você possa ver como o
+sistema de registo mantem um registo histórico.
+
+image::parksmap-logging-kibana-parksmap-headers.png[Kibana Interface]
+
+Tente a seguinte seqüência de pesquisa garantindo que você use o nome correto para seu projeto:
+
+CAUTION: Na seguinte query do Kibana, substitua `{{ USER_PROJECT }}` com o projeto fornecido a você.
+
+[source,bash,role=copypaste]
+----
+kubernetes.namespace_name:"{{ USER_PROJECT }}" AND message:"Failure executing"
+----
