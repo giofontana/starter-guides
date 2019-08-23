@@ -1,0 +1,100 @@
+Quase todas as interações com um ambiente OpenShift que você pode pensar
+requer passar pela API do control plane do OpenShift. Todas as interações de API são autenticadas (AuthN - quem é você?) e autorizadas (AuthZ - você está autorizado a fazer o que você está pedindo?).
+
+Como OpenShift é uma plataforma declarativa, algumas ações serão executadas pela plataforma e não pelo usuário final (quando ele ou ela emite um comando). Essas ações são executadas usando uma *Service Account* que é um tipo especial de `user` que a plataforma usará internamente.
+
+O OpenShift cria automaticamente algumas contas de serviço especiais em cada projeto.
+A conta de serviço **default** é a que está assumindo a responsabilidade de executar os pods, e o OpenShift usa e injeta essa conta de serviço em
+cada pod que é lançado. Alterando as permissões para essa conta de serviço podemos fazer coisas interessantes.
+
+Você pode exibir as permissões atuais na interface do usuário da Web, navegando até a página "Resources -> Membership".
+
+image::parksmap-permissions-membership.png[Membership]
+
+== Exercício: conceder permissão para conta de serviço
+O aplicativo parksmap quer falar com a API do OpenShift para saber mais sobre outros
+*Pods*, *Services* e recursos dentro do *Projeto*.
+
+CAUTION: No seguinte comando (s), substitua `{{ USER_PROJECT }}` com o projeto fornecido a você.
+
+[source,bash,role=copypaste]
+----
+oc project {{ USER_PROJECT }}
+----
+
+Então:
+
+[source,bash,role=copypaste]
+----
+oc policy add-role-to-user view -z default
+----
+
+O comando `oc policy` acima está dando uma _role_ ( `view` ) definido para um usuário. Mas
+estamos usando uma flag especial, `-z`. O que esta flag faz? A partir da saída do comando `oc policy -h`:
+
+[source,bash]
+----
+-z, --serviceaccount=[]: service account in the current namespace to use as a user
+----
+
+A sintaxe `-z` é um atalho que nos salva de ter que digitar a
+seqüência inteira, que, neste caso, é
+`system:serviceaccount:{{ USER_PROJECT }}:default`. É um atalho bacana.
+
+[NOTE]
+====
+A flag `-z` só funcionará para contas de serviço no projeto *atual*.
+Se você estiver se referindo a uma conta de serviço em um projeto diferente, use a opção `-n <project>`.
+====
+
+Agora que a *Service Account* `default` tem a permissão **view**, então agora ele pode consultar a API para ver quais recursos estão dentro do *projeto*. 
+
+Outra maneira que você poderia ter feito o mesmo é usando o console OpenShift. Uma vez que você está na página *"Resources -> Membership"*, clique em *Service Accounts* e, em seguida, em *Edit Membership*.
+
+image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
+
+Adicione a role view à conta de serviço *{{ USER_PROJECT }}/default* e, em seguida,
+clique no botão *"Add"*.
+
+image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
+
+Depois de ter terminado de editar as permissões, clique no botão *"Done Editing"*.
+
+image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
+
+== Exercício: reimplantar aplicativo
+Mais um passo é necessário. Precisamos re-implantar o aplicativo.
+
+Desta vez vamos usar o console Web. Encontre seu projeto `{{ USER_PROJECT }}`,
+e, em seguida, clique em "Applications" e depois em "Deployments". Você verá o
+aplicativo, `parksmap` listado. Clique nele.
+
+A tela de implantação informa muito sobre como o aplicativo será implantado. 
+No canto superior direito, há um botão rotulado como "Deploy". Este botão irá
+causar uma nova implantação (que criará um novo *ReplicationController*).
+
+Clique nele.
+
+image::parksmap-permissions-redeploy.png[Deploy Button]
+
+Você verá que uma nova implantação é iniciada imediatamente. Volte à página de overview
+para ver o que irá acontecer. 
+
+image::parksmap-permissions-redeployed.png[Application deployed]
+
+== Exercício: conceder permissões de visualização do usuário
+Se você criar um projeto, você é o administrador do projeto. Isto significa que
+você também pode conceder acesso a outros usuários. Se você quiser, dê 
+acesso para o seu vizinho ao seu projeto usando o seguinte comando:
+
+CAUTION: No seguinte comando (s), substitua `{{ USER_PROJECT }}` com o nome de usuário da pessoa a quem você deseja conceder acesso.
+
+[source,bash,role=copypaste]
+----
+oc policy add-role-to-user view {{ USER_PROJECT }}
+----
+
+Peça para seu vizinho clicar em *Projects* e verificar
+que eles podem ver seu projeto e seus recursos. Este tipo de permissão (_view_
+mas não _edit_) pode ser ideal para um desenvolvedor obter visibilidade de um
+projeto de aplicação de produção.

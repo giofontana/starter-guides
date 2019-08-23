@@ -93,7 +93,7 @@ Now using project "{{ USER_PROJECT }}" on server "{{CONSOLE_ADDRESS}}".
 
 Se você tinha vários projetos, a primeira coisa que você precisa fazer é mudar para o projeto *{{USER_PROJECT}}* para ter certeza de que está no projeto correto a partir de agora. Você pode fazer isso com o seguinte comando:
 
-CUIDADO: No seguinte comando, substitua `{{USER_PROJECT}}` com o projeto fornecido a você.
+CAUTION: No seguinte comando, substitua `{{USER_PROJECT}}` com o projeto fornecido a você.
 
 [source,bash,role=copypaste]
 ----

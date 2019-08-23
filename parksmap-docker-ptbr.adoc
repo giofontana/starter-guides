@@ -10,7 +10,7 @@ Retorne ao web console:
 
 *link:{{CONSOLE_ADDRESS}}[]*
 
-CUIDADO: Nos passos seguintes, substitua `{{ USER_PROJECT }}` com o projeto fornecido a você.
+CAUTION: Nos passos seguintes, substitua `{{ USER_PROJECT }}` com o projeto fornecido a você.
 
 Encontre o seu projeto *{{ USER_PROJECT }}* e clique nele. Na próxima página, clique em *"Add to Project"* e um menu suspenso será exibido. Existem várias opções, mas estamos preocupados apenas com a opção "Deploy Image". Clique em "Deploy Image" na lista suspensa *"Add to Project"*.
 

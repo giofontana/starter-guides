@@ -153,6 +153,8 @@ modules:
       ROUTER_ADDRESS:
   parksmap-permissions:
     name: Role-Based Access Control
+  parksmap-permissions-ptbr:
+    name: Role-Based Access Control    
   parksmap-rsh:
     name: Remote Access to Your Application
   parksmap-rsh-ptbr:

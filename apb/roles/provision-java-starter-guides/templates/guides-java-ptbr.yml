@@ -66,7 +66,7 @@ objects:
         - parksmap-routes-ptbr
         - parksmap-rsh-ptbr
 
-        - parksmap-permissions
+        - parksmap-permissions-ptbr
 
         - parksmap-scaling
         - parksmap-logging
