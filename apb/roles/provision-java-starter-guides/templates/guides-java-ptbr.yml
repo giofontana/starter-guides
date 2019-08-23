@@ -64,7 +64,7 @@ objects:
         - common-parksmap-architecture-ptbr
         - parksmap-docker-ptbr
         - parksmap-routes-ptbr
-        - parksmap-rsh
+        - parksmap-rsh-ptbr
 
         - parksmap-permissions
 
