@@ -71,7 +71,7 @@ objects:
         - parksmap-scaling-ptbr
         - parksmap-logging-ptbr
         - ocp-monitoring-ptbr
-        - parksmap-application-health
+        - parksmap-application-health-ptbr
         
         - common-further-resources
         - common-workshop-links

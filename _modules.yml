@@ -226,6 +226,10 @@ modules:
     vars:
       DOCS_URL:
 
+  parksmap-application-health-ptbr:
+    name: Application Health
+    vars:
+      DOCS_URL:
 
 
 #  pipelines:

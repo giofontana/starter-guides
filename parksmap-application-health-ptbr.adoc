@@ -1,0 +1,70 @@
+== Background: Readiness and Liveness Probes
+O OpenShift implementa os conceitos _health checks_. Estes vêm em dois sabores:
+
+* Readiness probe
+* Liveness probe
+
+A partir da seção 
+https://{{DOCS_URL}}/dev_guide/application_health.html[Application
+Health] da documentação, vemos as seguintes definições:
+
+[glossary]
+Liveness Probe::
+  Um liveness probe verifica se o contentor em que está configurado ainda está
+  executando. Se a probe falhar, o kubelet mata o container, que
+  será submetido à sua política de reinicialização. Defina uma liveness probe configurando
+  `template.spec.containers.livenessprobe` da configuração de um pod.
+Readiness Probe::
+  Um readiness probe determina se um container está pronto para receber requisições. Se
+  a probe falhar, o controlador de endpoints garante o pod tem seu endereço IP removido dos endpoints de todos os *Services*. Um
+  readiness probe pode ser usado para sinalizar para o controlador de endpoints que, mesmo
+  que um contêiner está sendo executado, ele não deve receber qualquer tráfego de um proxy.
+  Defina uma verificação de prontidão Configurando o
+  `template.spec.containers.readinessprobe` da configuração de um pod.
+
+Parece complicado, mas realmente não é. Nós usaremos o console da Web para adicionar
+estas probes para a nossa aplicação `parksmap`.
+
+== Exercício: adicionar verificações de integridade
+Vamos acrescentar um readiness e liveness probe ao deployment existente
+`parksmap`. Isso garantirá que o OpenShift não adicione
+instâncias para o serviço até que eles passem nas verificações de readiness, e irá garantir
+que instâncias não íntegras são reiniciadas (se eles falharem nas verificações de liveness).
+
+Clique em *Applications -> Deployments* na barra do lado esquerdo. Clique
+em `parksmap`. Clique em `Configuration`.
+Você verá o aviso sobre verificações de health check, com um link.
+Clique a fim adicioná-los.
+
+image::parksmap-application-health-warning.png[Healthchecks warning,align="center"]
+
+Clique *Add health checks* agora.
+
+Você desejará clicar em ambos os *Add Readiness Probe* e *Add Liveness Probe* e
+em seguida, preenchê-los como segue:
+
+_Readiness Probe_
+
+* Path: `/`
+* Initial Delay: `1`
+* Timeout: `1`
+
+_Liveness Probe_
+
+* Path: `/`
+* Initial Delay: `60`
+* Timeout: `1`
+
+Isso é mostrado na imagem a seguir:
+
+image::parksmap-application-health-config-readiness.png[Readiness Probe]
+image::parksmap-application-health-config-liveness.png[Liveness Probe]
+
+Depois de inserir os valores acima, clique em *Save* e, em seguida, clique no botão *Overview* na navegação à esquerda. Você
+vai notar que essas mudanças causaram um novo deploy -- eles contaram como um
+alteração de configuração.
+
+Você também vai notar que o círculo em torno do novo deploy permanece azul claro
+por um tempo. Este é um sinal de que o Pod (s) ainda não passaram na checagem de readiness - está funcionando!
+
+image::parksmap-application-health-redeploy.png[Application Health]
