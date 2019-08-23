@@ -1,0 +1,17 @@
+Este laboratório apresenta a arquitetura do aplicativo ParksMap usado ao longo deste workshop, para entender melhor as coisas que você fará da perspectiva do usuário do OpenShift. ParksMap é um aplicativo de visualização de dados geoespaciais poliglota construído usando a arquitetura de microsserviços e é composto por um conjunto de serviços que são desenvolvidos usando diferentes linguagens de programação e frameworks.
+
+image::roadshow-app-architecture.png[Application architecture,800,align="center"]
+
+O serviço principal é um aplicativo web que possui um componente do lado do servidor, responsável por agregar as APIs geoespaciais fornecidas por vários serviços de backend independentes e um componente do lado do cliente em JavaScript que é responsável por visualizar os dados geoespaciais no mapa. O componente do lado do cliente que é executado em seu navegador se comunica com o servidor pelo protocolo WebSockets para atualizar o mapa em tempo real.
+
+Ele utiliza um conjunto de serviços de back-end independentes implantados que fornecem diferentes mapeamentos e informações geoespaciais. O conjunto de serviços de back-end disponíveis que fornecem informações geoespaciais são:
+
+* WorldWide National Parks
+* Major League Baseball Stadiums in the US
+* International Airports
+* Earthquakes epicenters in New Zealand in November 2017
+* Aussie Dunnies
+
+O código fonte original para esta aplicação está localizado link:https://github.com/openshift-roadshow/[here].
+
+O componente do lado do servidor do aplicativo da web ParksMap atua como um gateway de comunicação para todos os back-ends disponíveis. Neste workshop utilizaremos apenas o componente web (frontend) para exercitarmos os conceitos que são escopo desta seção.

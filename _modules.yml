@@ -90,6 +90,8 @@ modules:
       ROUTER_ADDRESS:        
   common-parksmap-architecture:
     name: Architecture Overview of the ParksMap Application
+  common-parksmap-architecture-ptbr:
+    name: Visão Geral da Aplicação ParksMap
   common-cli:
     name: Installing the *oc* client tool
     vars:

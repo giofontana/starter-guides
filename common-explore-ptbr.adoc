@@ -84,18 +84,16 @@ ATENÇÃO: No seguinte comando, substitua `{{ USER_PROJECT }}` pelo projeto forn
 oc new-project {{ USER_PROJECT }}
 ----
 
-You will see the following confirmation message:
+Você verá a seguinte mensagem de confirmação:
 
 [source,bash]
 ----
 Now using project "{{ USER_PROJECT }}" on server "{{CONSOLE_ADDRESS}}".
 ----
 
-If you had multiple projects, the first thing you would want to do is to switch 
-to the *{{ USER_PROJECT }}* project to make sure you're on the correct project from now on. 
-You can do this with the following command:
+Se você tinha vários projetos, a primeira coisa que você precisa fazer é mudar para o projeto *{{USER_PROJECT}}* para ter certeza de que está no projeto correto a partir de agora. Você pode fazer isso com o seguinte comando:
 
-CAUTION: In the following command, replace `{{ USER_PROJECT }}` with the project provided to you.
+CUIDADO: No seguinte comando, substitua `{{USER_PROJECT}}` com o projeto fornecido a você.
 
 [source,bash,role=copypaste]
 ----
