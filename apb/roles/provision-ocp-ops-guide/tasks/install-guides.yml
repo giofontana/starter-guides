@@ -4,29 +4,14 @@
 #####
 - name: "Process guides template (for java workshop)"
   template:
-    src: guides-java-ptbr.yml
+    src: guides-ptbr.yml
     dest: "{{ tmp_dir.path }}/guides.yml"
-  when: workshop_type == "java"
-#- name: "Process guides template (for java workshop)"
-#  template:
-#    src: guides-java.yml
-#    dest: "{{ tmp_dir.path }}/guides.yml"
-#  when: workshop_type == "java"  
+  when: workshop_type == "ptbr"
 - name: "Process guides template (for python workshop)"
   template:
-    src: guides-python.yml
+    src: guides-eng.yml
     dest: "{{ tmp_dir.path }}/guides.yml"
-  when: workshop_type == "python"
-- name: "Process guides template (for node.js workshop)"
-  template:
-    src: guides-nodejs.yml
-    dest: "{{ tmp_dir.path }}/guides.yml"
-  when: workshop_type == "node.js"
-- name: "Process guides template (for php workshop)"
-  template:
-    src: guides-php.yml
-    dest: "{{ tmp_dir.path }}/guides.yml"
-  when: workshop_type == "php"
+  when: workshop_type == "eng"
 
 - name: Delete guides app, if already exists
   command: "oc delete dc starter-guides -n {{ namespace }}"
