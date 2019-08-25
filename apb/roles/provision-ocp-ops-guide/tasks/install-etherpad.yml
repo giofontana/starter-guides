@@ -3,6 +3,17 @@
 # Etherpad
 #####
 
+- name: Check if etherpad is already installed
+  command: "oc -n {{ namespace }} get deploymentconfig etherpad"
+  register: etherpad_dc
+  ignore_errors: true
+
+- name: Etherpad is already installed!
+  assert:
+    that:
+      - etherpad_dc is defined
+    success_msg: "Etherpad is already installed!"
+
 - name: Create mysql
   command: "oc -n {{ namespace }} new-app mysql-persistent --param MYSQL_USER=ether --param MYSQL_PASSWORD=ether --param MYSQL_DATABASE=ether --param VOLUME_CAPACITY=4Gi --param MYSQL_VERSION=5.7 --name=mysql-etherpad"
 
