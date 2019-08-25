@@ -8,3 +8,4 @@
 
 - name: Etherpad
   command: "oc -n {{ namespace }} new-app -f https://raw.githubusercontent.com/wkulhanek/docker-openshift-etherpad/master/etherpad-template.yaml -p DB_USER=ether -p DB_PASS=ether -p DB_DBID=ether -p DB_PORT=3306 -p DB_HOST=mysql -p ADMIN_PASSWORD=secret --name=etherpad"
+  
