@@ -13,6 +13,9 @@
   register: terminal_dc
   ignore_errors: true
 
+- debug:
+    msg: "terminal_dc = {{ etherpad_dc }}"
+
 - name: "Process hosted workshop template"
   template:
     src: hosted-workshop-production.json
@@ -39,4 +42,3 @@
   args:
     chdir: "{{ tmp_dir.path }}"
   when: terminal_dc is not defined
-  
