@@ -8,13 +8,20 @@
 # this repo.
 #####
 
+- name: Check if terminal is already installed
+  command: "oc -n {{ namespace }} get deploymentconfig terminal"
+  register: terminal_dc
+  ignore_errors: true
+
 - name: "Process hosted workshop template"
   template:
     src: hosted-workshop-production.json
     dest: "{{ tmp_dir.path }}/hosted-workshop-production.json"
+  when: terminal_dc is not defined
 
 - name: Add hosted workshop template to {{ namespace }}
   command: "oc apply -f {{ tmp_dir.path }}/hosted-workshop-production.json -n {{ namespace }}"
+  when: terminal_dc is not defined
 
 - name: Generate hosted workshop app manifest
   shell: >
@@ -25,8 +32,11 @@
         --dry-run -o json > hosted-workshop-production.json
   args:
     chdir: "{{ tmp_dir.path }}"
+  when: terminal_dc is not defined
 
 - name: Apply hosted workshop manifest to instantiate cluster objects
   command: "oc apply -f hosted-workshop-production.json -n {{ namespace }}"
   args:
     chdir: "{{ tmp_dir.path }}"
+  when: terminal_dc is not defined
+  
