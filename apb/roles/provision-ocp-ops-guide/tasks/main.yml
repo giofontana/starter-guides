@@ -66,15 +66,6 @@
 - include_tasks: install-terminals.yml
   when: '"terminals" in features_to_install'
 
-#- include_tasks: install-gogs.yml
-#  when: '"gogs" in features_to_install'
-
-#- include_tasks: install-nexus.yml
-#  when: '"nexus" in features_to_install'
-
-#- include_tasks: install-ocp-ops-view.yml
-#  when: '"ocp-ops-view" in features_to_install'
-
 - include_tasks: per_user.yml
   with_sequence: start=1 end={{ user_count }} format={{ user_format }}
 

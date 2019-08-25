@@ -38,15 +38,14 @@ plans:
       required: true
       display_type: password
       display_group: OpenShift User
-      default: 'r3dh4t1!'
     - name: workshop_type
       title: Workshop type
-      description: Type of workshop to deliver (Java, Python, node.js)
+      description: Language of the workshop (eng, ptbr)
       type: enum
-      enum: ['java', 'python', 'node.js', 'php']
+      enum: ['eng', 'ptbr']
       required: true
       display_type: select
-      default: java
+      default: ptbr
       display_group: Workshop
     - name: user_count
       title: Number of participants
@@ -71,19 +70,3 @@ plans:
       display_type: text
       display_group: Lab Guide
       default: 'https://console.ws.rhbr-labs.com:8443'
-    - name: infrasvcs_adm_user
-      title: Infrastructure Services Admin User
-      description: Admin user for infrastructure services (Gogs, Nexus, ...)
-      type: string
-      default: "adminuser"
-      required: true
-      display_type: text
-      display_group: Infrastructure Services
-    - name: infrasvcs_adm_password
-      title: Infrastructure Services Admin Password
-      description: Admin password for infrastructure services (Gogs, Nexus, ...)
-      type: string
-      default: "admin123"
-      required: true
-      display_type: text
-      display_group: Infrastructure Services

@@ -17,5 +17,5 @@
   #     openshift_token
   # Output:
   #     apps_hostname_suffix
-  - role: provision-java-starter-guides
+  - role: provision-ocp-ops-guide
     playbook_debug: true
