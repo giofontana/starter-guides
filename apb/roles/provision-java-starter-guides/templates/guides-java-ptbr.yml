@@ -73,7 +73,7 @@ objects:
         - ocp-monitoring-ptbr
         - parksmap-application-health-ptbr
         
-        - common-further-resources
+        - common-further-resources-ptbr
         - common-workshop-links
 - kind: ImageStream
   apiVersion: v1

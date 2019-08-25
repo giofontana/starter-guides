@@ -1,0 +1,58 @@
+Os exercícios deste workshop mostram como o OpenShift pode ser usado não apenas para implantar
+aplicativos Web _stateless_, mas também aplicativos que exigem
+armazenamento do sistema de arquivos (_statefull_).
+
+Se você terminou este workshop cedo e quer experimentar um pouco mais,
+Temos exercícios adicionais que você pode experimentar usando nosso interativo on-line
+ambiente de aprendizagem.
+
+* *link:https://learn.openshift.com/[OpenShift Interactive Learning
+Portal]* - Um ambiente de aprendizado interativo on-line onde você pode executar
+através de vários cenários relacionados ao uso do OpenShift.
+
+O ambiente de aprendizado interativo online está sempre disponível para que você
+pode continuar a trabalhar naqueles exercícios mesmo depois que a oficina é sobre.
+
+* *link:http://cookbook.openshift.org/[OpenShift Cookbook]* - Receitas de tarefas comuns que usuários podem precisar fazer no OpenShift.
+
+Abaixo você encontrará mais recursos para aprender sobre o OpenShift e
+executando o OpenShift em seu próprio computador, bem como detalhes sobre o OpenShift
+Online ou outros produtos e serviços relacionados ao OpenShift.
+
+* *link:https://www.okd.io/[OKD]* - O projeto Open Source
+upstream que alimenta o OpenShift.
+
+* *link:https://www.okd.io/minishift/[Minishift]* - Uma ferramenta que pode
+ser usado para instalar um cluster OpenShift local em seu próprio computador, executando
+em uma máquina virtual.
+
+* *link:https://manage.openshift.com/[OpenShift Online]* - Um ambiente público compartilhado 
+para executar seus aplicativos usando o OpenShift.
+
+* *link:https://openshift.io/[OpenShift.io]* - Um ambiente de desenvolvimento online
+ para planejar, criar e implantar serviços de nuvem híbrida
+usando o OpenShift.
+
+* *link:https://www.openshift.com/dedicated[OpenShift Dedicated]* - Um
+ambiente de hospedagem dedicado para executar seus aplicativos, gerenciados e
+apoiado para você pela Red Hat.
+
+* *link:https://www.openshift.com/[OpenShift Container Platform]* - O produto suportado 
+pela Red Hat para instalações on premisse ou hospedado em nuvem pública.
+The Red
+
+Os seguintes eBooks online gratuitos também estão disponíveis para download relacionado a
+OpenShift.
+
+* *link:https://www.openshift.com/for-developers/[OpenShift
+for Developers]*
+
+image::further-resources-openshift-for-developers.png[OpenShift for Developers]
+
+* *link:https://www.openshift.com/devops-with-openshift/[DevOps with OpenShift]*
+
+image::further-resources-devops-with-openshift.png[DevOps with OpenShift]
+
+* *link:https://www.openshift.com/deploying-to-openshift/[Deploying with OpenShift]*
+
+image::further-resources-deploying-to-openshift.png[Deploying to OpenShift]

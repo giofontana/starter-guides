@@ -318,6 +318,8 @@ modules:
 
   common-further-resources:
     name: Further Resources
+  common-further-resources-ptbr:
+    name: Recursos Adicionais    
   common-workshop-links:
     name: Workshop Links
     vars:
