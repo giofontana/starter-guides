@@ -8,13 +8,6 @@
 # this repo.
 #####
 
-- name: Exit if terminal already exists
-  command: "oc get dc terminal -n {{ namespace }}"
-  register: terminal_dc
-
-- debug:
-    msg: "terminal_dc = {{terminal_dc}}"
-
 - name: "Process hosted workshop template"
   template:
     src: hosted-workshop-production.json
