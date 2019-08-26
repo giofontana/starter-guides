@@ -3,29 +3,25 @@
 # Etherpad
 #####
 
-- name: Check if etherpad is already installed
-  command: "oc -n {{ namespace }} get deploymentconfig etherpad"
-  register: etherpad_dc
-  ignore_errors: true
-
-- debug:
-    msg: "etherpad_dc = {{ etherpad_dc }}"
+#- name: Check if etherpad is already installed
+#  command: "oc -n {{ namespace }} get deploymentconfig etherpad"
+#  register: etherpad_dc
+#  ignore_errors: true
+#
+#- debug:
+#    msg: "etherpad_dc = {{ etherpad_dc }}"
 
 - name: Create mysql
   command: "oc -n {{ namespace }} new-app mysql-persistent --param MYSQL_USER=ether --param MYSQL_PASSWORD=ether --param MYSQL_DATABASE=ether --param VOLUME_CAPACITY=4Gi --param MYSQL_VERSION=5.7 --name=mysql-etherpad"
-  when: etherpad_dc.find("NotFound") != -1
 
 - name: "Create etherpad base text file from template"
   template:
     src: etherpad.txt.j2
     dest: "{{ tmp_dir.path }}/etherpad.txt"
-  when: etherpad_dc.find("NotFound") != -1
 
 - set_fact:
     etherpad_text: "{{ lookup('file', '{{ tmp_dir.path }}/etherpad.txt') | replace('\n', '\\n')}}"
-  when: etherpad_dc.find("NotFound") != -1
 
 - name: Etherpad
   command: "oc -n {{ namespace }} new-app -f https://raw.githubusercontent.com/wkulhanek/docker-openshift-etherpad/master/etherpad-template.yaml -p DB_USER=ether -p DB_PASS=ether -p DB_DBID=ether -p DB_PORT=3306 -p DB_HOST=mysql -p ADMIN_PASSWORD=secret --name=etherpad"
-  when: etherpad_dc.find("NotFound") != -1
   
