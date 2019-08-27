@@ -70,6 +70,7 @@ objects:
         - parksmap-logging-ptbr
         - ocp-monitoring-ptbr
         - parksmap-application-health-ptbr
+        - ocp-quotas-ptbr
         - common-further-resources-ptbr
         - common-workshop-links
 - kind: ImageStream

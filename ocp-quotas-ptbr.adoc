@@ -1,0 +1,54 @@
+== Exercício: Criar Quota
+
+No terminal, criar um `Cluster Resource Quota` que defina os seguintes limites (`hard limits`):
+
+- pods=25
+- requests.memory=6Gi
+- requests.cpu=5
+- limits.cpu=25
+- limits.memory=40Gi
+- configmaps=25
+- persistentvolumeclaims=25
+- services=25
+- project-annotation-selector para o user1
+
+Solução:
+
+[source,bash,role=copypaste]
+----
+$ oc create clusterquota clusterquota-user1 \
+--project-annotation-selector=openshift.io/requester=user1 \
+--hard pods=3 \
+--hard requests.memory=6Gi \
+--hard requests.cpu=5 \
+--hard limits.cpu=25 \
+--hard limits.memory=40Gi \
+--hard configmaps=25 \
+--hard persistentvolumeclaims=25 \
+--hard services=25
+
+clusterresourcequota.quota.openshift.io/clusterquota-user1 created
+----
+
+Visualize a quota aplicada no cluster:
+[source,bash,role=copypaste]
+----
+$ oc get clusterresourcequota
+Sample Output
+NAME LABEL SELECTOR ANNOTATION SELECTOR
+clusterquota-user1 <none> map[openshift.io/requester:user1]
+
+$ oc describe clusterresourcequota clusterquota-user1
+Sample Output
+Name: clusterquota-user1
+Created: 18 seconds ago
+Labels: <none>
+Annotations: <none>
+Namespace Selector: []
+Label Selector:
+AnnotationSelector: map[openshift.io/requester:user1]
+Resource Used Hard
+-------- ---- ----
+
+----
+

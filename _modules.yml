@@ -72,6 +72,8 @@ modules:
     name: OpenShift Introduction
   introduction-ptbr:
     name: OpenShift - Introdução    
+  ocp-quotas-ptbr:
+    name: Quotas & Limits      
   common-environment:
     name: Environment Overview
     vars:
